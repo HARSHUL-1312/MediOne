@@ -1,0 +1,237 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   MediOne — Explainer Agent: Styles
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Medicine Explanation Card ──────────────────────────────────────────────── */
+.med-explain-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  margin-bottom: 12px;
+  position: relative;
+  animation: slideDown 0.25s ease;
+  transition: all var(--transition);
+  box-shadow: var(--shadow-card);
+}
+.med-explain-card:hover { border-color: rgba(255,153,51,0.25); transform: translateY(-2px); box-shadow: var(--shadow-depth); }
+.med-explain-card::before {
+  content: ''; position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+.med-explain-card.unknown-med::before { background: var(--border); }
+
+.med-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.med-name { font-size: 16px; font-weight: 800; font-family: 'Plus Jakarta Sans', sans-serif;}
+.med-generic { font-size: 12px; color: var(--text-muted); margin-top: 2px; font-weight: 500; }
+.med-category {
+  padding: 4px 12px; border-radius: 20px;
+  font-size: 10px; font-weight: 800;
+  background: rgba(39,174,96,0.1); border: 1px solid rgba(39,174,96,0.2);
+  color: var(--accent-success); white-space: nowrap;
+}
+
+.med-purpose {
+  margin-top: 14px; padding: 12px 16px;
+  background: rgba(39,174,96,0.04);
+  border: 1px solid rgba(39,174,96,0.1);
+  border-radius: var(--radius-md);
+  font-size: 14px; color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.med-dosage-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 10px; margin-top: 12px;
+}
+.med-dosage-item {
+  padding: 10px 12px;
+  background: rgba(45,27,0,0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.med-dosage-label {
+  font-size: 10px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 0.8px; color: var(--text-muted);
+}
+.med-dosage-value {
+  font-size: 14px; font-weight: 700;
+  color: var(--text-primary); margin-top: 3px;
+}
+
+.med-side-fx {
+  margin-top: 12px;
+  display: flex; flex-wrap: wrap; gap: 6px;
+}
+.med-sfx-tag {
+  padding: 4px 12px; border-radius: 16px;
+  font-size: 11px; font-weight: 700;
+  background: rgba(243,156,18,0.08); border: 1px solid rgba(243,156,18,0.15);
+  color: var(--accent-warning);
+}
+
+.med-warnings {
+  margin-top: 12px;
+  padding: 10px 14px;
+  background: rgba(231,76,60,0.06);
+  border: 1px solid rgba(231,76,60,0.15);
+  border-radius: var(--radius-md);
+  font-size: 13px; color: var(--accent-danger);
+  font-weight: 500;
+}
+.med-warnings li { margin-bottom: 4px; }
+
+/* ── Lab Explanation Card ───────────────────────────────────────────────────── */
+.lab-explain-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  margin-bottom: 12px;
+  animation: slideDown 0.25s ease;
+  box-shadow: var(--shadow-card);
+}
+.lab-header { display: flex; justify-content: space-between; align-items: center; }
+.lab-test-name { font-size: 15px; font-weight: 800; font-family: 'Plus Jakarta Sans', sans-serif;}
+
+.lab-verdict {
+  padding: 4px 12px; border-radius: 20px;
+  font-size: 11px; font-weight: 800;
+}
+.lab-verdict.normal { background: rgba(39,174,96,0.1); color: var(--accent-success); border: 1px solid rgba(39,174,96,0.2); }
+.lab-verdict.abnormal { background: rgba(243,156,18,0.1); color: var(--accent-warning); border: 1px solid rgba(243,156,18,0.2); }
+.lab-verdict.critical { background: rgba(231,76,60,0.1); color: var(--accent-danger); border: 1px solid rgba(231,76,60,0.2); }
+
+.lab-what {
+  font-size: 13px; color: var(--text-secondary);
+  margin-top: 8px; line-height: 1.6;
+}
+.lab-values {
+  display: flex; gap: 20px; margin-top: 12px;
+  padding: 10px 16px;
+  background: rgba(45,27,0,0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+}
+.lab-val-label { color: var(--text-muted); font-weight: 600; }
+.lab-val-num { font-weight: 800; color: var(--text-primary); }
+
+/* ── Summary Cards ──────────────────────────────────────────────────────────── */
+.explain-summary {
+  padding: 16px 20px;
+  border-radius: var(--radius-lg);
+  font-size: 14px; line-height: 1.7;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 16px rgba(45,27,0,0.04);
+}
+.explain-summary.rx-summary {
+  background: linear-gradient(135deg, rgba(255,153,51,0.08), rgba(255,107,107,0.05));
+  border: 1px solid rgba(255,153,51,0.15);
+  color: var(--text-secondary);
+}
+.explain-summary.lab-summary {
+  background: linear-gradient(135deg, rgba(52,152,219,0.08), rgba(142,68,173,0.05));
+  border: 1px solid rgba(52,152,219,0.15);
+  color: var(--text-secondary);
+}
+
+/* ── Interaction Warning ────────────────────────────────────────────────────── */
+.interaction-card {
+  padding: 14px 18px;
+  background: rgba(243,156,18,0.06);
+  border: 1px solid rgba(243,156,18,0.18);
+  border-radius: var(--radius-md);
+  margin-bottom: 12px;
+  font-size: 13px;
+  display: flex; align-items: flex-start; gap: 12px;
+  animation: slideDown 0.25s ease;
+  font-weight: 500;
+}
+.interaction-icon { font-size: 20px; flex-shrink: 0; }
+
+/* ── Disclaimer ─────────────────────────────────────────────────────────────── */
+.explain-disclaimer {
+  font-size: 12px; color: var(--text-muted);
+  font-style: italic;
+  padding: 12px 0; margin-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+/* ── Manual Input ───────────────────────────────────────────────────────────── */
+.explain-input-section {
+  margin-bottom: 24px;
+}
+.explain-textarea {
+  width: 100%; min-height: 140px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  font-size: 14px;
+  color: var(--text-primary);
+  resize: vertical;
+  font-family: 'Inter', monospace;
+  line-height: 1.6;
+  box-shadow: inset 0 2px 4px rgba(45,27,0,0.02);
+  transition: all var(--transition);
+}
+.explain-textarea:focus { border-color: var(--accent-primary); box-shadow: 0 0 0 3px rgba(255,153,51,0.1); background: rgba(255,153,51,0.02); }
+.explain-textarea::placeholder { color: var(--text-muted); font-weight: 500; }
+.explain-submit-btn {
+  margin-top: 12px;
+  padding: 12px 28px;
+  border-radius: var(--radius-md);
+  font-size: 14px; font-weight: 800;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: linear-gradient(135deg, var(--accent-primary), #FF6B00);
+  color: var(--text-on-accent);
+  cursor: pointer; border: none;
+  transition: all var(--transition);
+  display: inline-flex; align-items: center; gap: 8px;
+  box-shadow: 0 4px 16px rgba(255,153,51,0.3);
+}
+.explain-submit-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,153,51,0.4); }
+
+/* ── "Explain This" inline button (injected into records) ───────────────────── */
+.explain-this-btn {
+  padding: 6px 14px;
+  border-radius: var(--radius-sm);
+  font-size: 11px; font-weight: 800;
+  background: linear-gradient(135deg, rgba(255,153,51,0.12), rgba(255,107,107,0.08));
+  border: 1px solid rgba(255,153,51,0.25);
+  color: var(--accent-primary);
+  cursor: pointer;
+  transition: all var(--transition);
+  margin-top: 10px;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.explain-this-btn:hover {
+  background: rgba(255,153,51,0.18);
+  border-color: var(--accent-primary);
+  transform: translateY(-1px);
+}
+
+/* ── Tab switcher for Explain page ──────────────────────────────────────────── */
+.explain-tabs {
+  display: flex; gap: 0; margin-bottom: 24px;
+  border-bottom: 2px solid var(--border);
+}
+.explain-tab {
+  padding: 12px 24px;
+  font-size: 13px; font-weight: 800;
+  color: var(--text-muted);
+  cursor: pointer; border: none;
+  background: none;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -3px;
+  transition: all var(--transition);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.explain-tab.active {
+  color: var(--accent-primary);
+  border-bottom-color: var(--accent-primary);
+}
+.explain-tab:hover:not(.active) { color: var(--text-secondary); background: rgba(255,153,51,0.04); }

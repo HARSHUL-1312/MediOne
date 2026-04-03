@@ -1,0 +1,290 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   MediOne — Symptom Triage Agent: Chat UI Styles
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Chat Container ─────────────────────────────────────────────────────────── */
+.triage-chat-wrap {
+  display: flex; flex-direction: column;
+  height: calc(100vh - 180px);
+  max-height: 700px;
+}
+.triage-chat {
+  flex: 1; overflow-y: auto;
+  padding: 20px 0;
+  display: flex; flex-direction: column; gap: 12px;
+  scrollbar-width: thin;
+  scroll-behavior: smooth;
+}
+
+/* ── Chat Bubbles ───────────────────────────────────────────────────────────── */
+.chat-row { display: flex; gap: 10px; max-width: 85%; animation: slideDown 0.22s ease; }
+.chat-row.agent { align-self: flex-start; }
+.chat-row.patient { align-self: flex-end; flex-direction: row-reverse; }
+
+.chat-avatar {
+  width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0;
+  margin-top: 2px;
+}
+.chat-avatar.agent-av { background: linear-gradient(135deg, rgba(255,153,51,0.2), rgba(255,107,107,0.15)); }
+.chat-avatar.patient-av { background: linear-gradient(135deg, rgba(142,68,173,0.15), rgba(255,153,51,0.15)); }
+
+.chat-bubble {
+  padding: 12px 18px;
+  border-radius: 18px;
+  font-size: 14px; line-height: 1.65;
+  position: relative;
+  max-width: 100%;
+  box-shadow: 0 2px 10px rgba(45,27,0,0.03);
+}
+.chat-row.agent .chat-bubble {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-bottom-left-radius: 6px;
+  color: var(--text-primary);
+}
+.chat-row.patient .chat-bubble {
+  background: linear-gradient(135deg, rgba(255,153,51,0.18), rgba(255,107,107,0.1));
+  border: 1px solid rgba(255,153,51,0.3);
+  border-bottom-right-radius: 6px;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+.chat-time {
+  font-size: 10px; color: var(--text-muted);
+  margin-top: 5px; font-weight: 600;
+}
+
+/* ── Typing Indicator ───────────────────────────────────────────────────────── */
+.typing-indicator {
+  display: flex; gap: 4px; align-items: center;
+  padding: 14px 20px;
+}
+.typing-dot {
+  width: 6px; height: 6px;
+  background: var(--accent-primary);
+  border-radius: 50%;
+  animation: typingBounce 1.4s ease infinite;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes typingBounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-6px); opacity: 1; }
+}
+
+/* ── Risk Assessment Card ───────────────────────────────────────────────────── */
+.risk-card {
+  background: var(--risk-gradient, var(--bg-card));
+  border: 1px solid var(--risk-border, var(--border));
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  margin: 4px 0;
+  animation: riskEntrance3D 0.35s cubic-bezier(0.34,1.56,0.64,1);
+  transform-style: preserve-3d;
+  max-width: 100%;
+  box-shadow: var(--shadow-card);
+}
+.risk-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 5px 14px;
+  border-radius: 24px;
+  font-size: 13px; font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  border: 1px solid var(--risk-border, var(--border));
+}
+.risk-badge.emergency { background: rgba(231,76,60,0.15); color: #C0392B; border-color: rgba(231,76,60,0.3); }
+.risk-badge.high      { background: rgba(243,156,18,0.15); color: #D68910; border-color: rgba(243,156,18,0.3); }
+.risk-badge.moderate  { background: rgba(241,196,15,0.15); color: #D4AC0D; border-color: rgba(241,196,15,0.3); }
+.risk-badge.mild      { background: rgba(39,174,96,0.15); color: #219A52; border-color: rgba(39,174,96,0.3); }
+
+.risk-explanation {
+  font-size: 14px; color: var(--text-secondary);
+  line-height: 1.7; margin-bottom: 12px;
+  font-family: 'Noto Sans Devanagari','Inter', sans-serif;
+}
+.risk-action {
+  background: rgba(45,27,0,0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  font-size: 14px; font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+.risk-specialist {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 11px; font-weight: 700;
+  background: rgba(52,152,219,0.1); border: 1px solid rgba(52,152,219,0.2);
+  color: var(--accent-info);
+  margin-right: 6px; margin-bottom: 6px;
+}
+.risk-facility {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 11px; font-weight: 700;
+  background: rgba(142,68,173,0.1); border: 1px solid rgba(142,68,173,0.2);
+  color: var(--accent-purple);
+  margin-bottom: 6px;
+}
+.risk-chronic-note {
+  background: rgba(243,156,18,0.08);
+  border: 1px solid rgba(243,156,18,0.2);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  font-size: 13px; color: var(--text-secondary);
+  margin-top: 10px; margin-bottom: 10px;
+  font-weight: 500;
+}
+.risk-disclaimer {
+  font-size: 11px; color: var(--text-muted);
+  margin-top: 12px; padding-top: 12px;
+  border-top: 1px solid var(--border);
+  font-style: italic;
+}
+.risk-log-btn {
+  margin-top: 12px;
+  padding: 10px 18px;
+  border-radius: var(--radius-md);
+  font-size: 13px; font-weight: 700;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background: linear-gradient(135deg, var(--accent-primary), #FF6B00);
+  color: var(--text-on-accent);
+  cursor: pointer; border: none;
+  transition: all var(--transition);
+  display: inline-flex; align-items: center; gap: 6px;
+  box-shadow: 0 4px 16px rgba(255,153,51,0.3);
+}
+.risk-log-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(255,153,51,0.4); }
+
+/* ── Emergency Full-Screen Overlay ──────────────────────────────────────────── */
+.emergency-overlay {
+  position: fixed; inset: 0;
+  background: linear-gradient(135deg, rgba(231,76,60,0.95), rgba(192,57,43,0.95));
+  z-index: 600;
+  display: flex; align-items: center; justify-content: center;
+  animation: fadeIn 0.2s ease;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+}
+.emergency-content {
+  text-align: center;
+  max-width: 480px;
+  animation: scaleIn 0.3s cubic-bezier(0.34,1.56,0.64,1);
+}
+.emergency-icon { font-size: 80px; margin-bottom: 16px; animation: emergencyPulse3D 1s ease infinite; }
+.emergency-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 28px; font-weight: 900; color: #fff;
+  text-transform: uppercase; letter-spacing: 2px;
+  margin-bottom: 14px;
+}
+.emergency-msg {
+  font-size: 16px; color: rgba(255,255,255,0.9);
+  line-height: 1.7; margin-bottom: 28px;
+  font-family: 'Noto Sans Devanagari','Inter', sans-serif;
+}
+.emergency-call-btn {
+  padding: 16px 40px;
+  border-radius: 30px;
+  font-size: 18px; font-weight: 800;
+  background: #fff;
+  color: #C0392B;
+  cursor: pointer; border: none;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+  transition: all var(--transition);
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-bottom: 16px;
+}
+.emergency-call-btn:hover { transform: scale(1.05) translateY(-2px); box-shadow: 0 16px 40px rgba(0,0,0,0.4); }
+.emergency-dismiss {
+  display: block;
+  margin: 10px auto 0;
+  background: rgba(0,0,0,0.1); border: 1px solid rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.8);
+  padding: 8px 20px; border-radius: 20px;
+  font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: all var(--transition);
+}
+.emergency-dismiss:hover { background: rgba(0,0,0,0.2); border-color: rgba(255,255,255,0.5); }
+
+/* ── Quick Symptom Chips ────────────────────────────────────────────────────── */
+.symptom-chips {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin: 12px 0;
+}
+.symptom-chip {
+  padding: 8px 16px;
+  border-radius: 24px;
+  font-size: 13px; font-weight: 600;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition);
+  display: flex; align-items: center; gap: 6px;
+  box-shadow: 0 2px 8px rgba(45,27,0,0.02);
+}
+.symptom-chip:hover {
+  border-color: rgba(255,153,51,0.3);
+  background: rgba(255,153,51,0.06);
+  color: var(--accent-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255,153,51,0.1);
+}
+
+/* ── Chat Input Bar ─────────────────────────────────────────────────────────── */
+.chat-input-bar {
+  display: flex; gap: 10px; align-items: center;
+  padding: 16px 0 0;
+  border-top: 1px solid var(--border);
+}
+.chat-input {
+  flex: 1;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 14px 20px;
+  font-size: 15px;
+  color: var(--text-primary);
+  transition: all var(--transition);
+  box-shadow: inset 0 2px 4px rgba(45,27,0,0.02);
+}
+.chat-input:focus { border-color: var(--accent-primary); box-shadow: 0 0 0 3px rgba(255,153,51,0.1); background: rgba(255,153,51,0.03); }
+.chat-input::placeholder { color: var(--text-muted); font-weight: 500; }
+.chat-send-btn {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-primary), #FF6B00);
+  color: var(--text-on-accent);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px;
+  cursor: pointer; border: none;
+  box-shadow: 0 4px 16px rgba(255,153,51,0.3);
+  transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  flex-shrink: 0;
+}
+.chat-send-btn:hover { transform: scale(1.1) rotate(-5deg); box-shadow: 0 8px 24px rgba(255,153,51,0.4); }
+
+/* ── Follow-up Question Buttons ─────────────────────────────────────────────── */
+.followup-btns {
+  display: flex; flex-direction: column; gap: 8px;
+  margin-top: 10px;
+}
+.followup-btn {
+  padding: 10px 16px;
+  border-radius: var(--radius-md);
+  font-size: 13px; font-weight: 600;
+  background: rgba(52,152,219,0.06);
+  border: 1px solid rgba(52,152,219,0.15);
+  color: var(--text-primary);
+  cursor: pointer; text-align: left;
+  transition: all var(--transition);
+}
+.followup-btn:hover { background: rgba(52,152,219,0.12); border-color: var(--accent-info); transform: translateX(2px); }

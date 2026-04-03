@@ -1,0 +1,437 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   MediOne — Medication Adherence Agent: Additional Styles
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Adherence Tab Bar ──────────────────────────────────────────────────────── */
+.adh-tabs {
+  display: flex; gap: 4px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 5px;
+  margin-bottom: 22px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  box-shadow: var(--shadow-card);
+}
+.adh-tabs::-webkit-scrollbar { display: none; }
+.adh-tab {
+  padding: 9px 18px;
+  border-radius: var(--radius-md);
+  font-size: 13px; font-weight: 700;
+  color: var(--text-secondary);
+  background: none;
+  white-space: nowrap;
+  transition: all var(--transition);
+  cursor: pointer;
+  border: none;
+}
+.adh-tab:hover { color: var(--text-primary); background: rgba(255,153,51,0.06); }
+.adh-tab.active {
+  background: linear-gradient(135deg, rgba(255,153,51,0.15), rgba(255,107,107,0.08));
+  color: var(--accent-primary);
+  border: 1px solid rgba(255,153,51,0.2);
+}
+
+/* ── Today's Schedule Cards ─────────────────────────────────────────────────── */
+.schedule-slot {
+  display: flex;
+  gap: 14px;
+  align-items: stretch;
+  margin-bottom: 16px;
+}
+.schedule-slot-time {
+  display: flex; flex-direction: column; align-items: center;
+  min-width: 56px;
+}
+.slot-time-label {
+  font-size: 10px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 0.8px; color: var(--text-muted);
+}
+.slot-time-val {
+  font-size: 15px; font-weight: 800;
+  color: var(--accent-primary);
+  margin-top: 2px;
+  font-variant-numeric: tabular-nums;
+}
+.slot-line {
+  width: 2px; flex: 1; min-height: 20px;
+  background: linear-gradient(180deg, var(--accent-primary), rgba(255,153,51,0.15));
+  margin: 6px auto 0;
+  border-radius: 1px;
+}
+
+.dose-card {
+  flex: 1;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  animation: doseFloat 4s ease-in-out infinite;
+  animation-play-state: paused;
+}
+.dose-card:hover { animation-play-state: running; }
+.dose-card::before {
+  content: ''; position: absolute;
+  left: 0; top: 0; bottom: 0; width: 3px;
+  background: var(--slot-color, var(--accent-primary));
+  border-radius: 0 2px 2px 0;
+  opacity: 0.8;
+}
+.dose-card.taken    { border-color: rgba(39,174,96,0.25); background: rgba(39,174,96,0.04); }
+.dose-card.skipped  { border-color: rgba(243,156,18,0.2); opacity: 0.75; }
+.dose-card.snoozed  { border-color: rgba(52,152,219,0.2); }
+
+.dose-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.dose-name  { font-size: 15px; font-weight: 800; }
+.dose-meta  { font-size: 12px; color: var(--text-secondary); margin-top: 3px; }
+.dose-actions { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+
+.dose-btn {
+  padding: 7px 14px;
+  border-radius: var(--radius-md);
+  font-size: 12px; font-weight: 700;
+  cursor: pointer; border: none;
+  transition: all var(--transition);
+  display: flex; align-items: center; gap: 5px;
+}
+.dose-btn-taken  {
+  background: linear-gradient(135deg, var(--accent-success), #219a52);
+  color: #fff;
+  box-shadow: 0 3px 12px rgba(39,174,96,0.3);
+}
+.dose-btn-taken:hover  { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(39,174,96,0.4); }
+.dose-btn-taken:active { transform: translateY(2px); }
+.dose-btn-snooze {
+  background: rgba(52,152,219,0.08);
+  border: 1px solid rgba(52,152,219,0.2);
+  color: var(--accent-info);
+}
+.dose-btn-snooze:hover { background: rgba(52,152,219,0.15); }
+.dose-btn-skip {
+  background: rgba(243,156,18,0.08);
+  border: 1px solid rgba(243,156,18,0.18);
+  color: var(--accent-warning);
+}
+.dose-btn-skip:hover { background: rgba(243,156,18,0.15); }
+
+.dose-status-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 4px 10px; border-radius: 20px;
+  font-size: 11px; font-weight: 700;
+}
+.dose-status-badge.taken   { background: rgba(39,174,96,0.1); color: var(--accent-success); border: 1px solid rgba(39,174,96,0.2); }
+.dose-status-badge.skipped { background: rgba(243,156,18,0.08); color: var(--accent-warning); border: 1px solid rgba(243,156,18,0.18); }
+.dose-status-badge.snoozed { background: rgba(52,152,219,0.08); color: var(--accent-info); border: 1px solid rgba(52,152,219,0.18); }
+.dose-status-badge.pending { background: rgba(45,27,0,0.04); color: var(--text-muted); border: 1px solid var(--border); }
+
+.snooze-countdown {
+  font-size: 11px; font-weight: 600; color: var(--accent-info);
+  display: flex; align-items: center; gap: 4px; margin-top: 6px;
+  animation: pulse-ring 2s ease infinite;
+}
+
+/* ── Adherence Score Rings / Bars ────────────────────────────────────────────── */
+.adh-score-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.adh-score-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px;
+  display: flex; flex-direction: column; gap: 10px;
+  transition: all var(--transition);
+  box-shadow: var(--shadow-card);
+}
+.adh-score-card:hover { border-color: rgba(255,153,51,0.2); transform: translateY(-2px); box-shadow: var(--shadow-depth); }
+.adh-score-top { display: flex; align-items: center; justify-content: space-between; }
+.adh-med-name  { font-size: 13px; font-weight: 800; }
+.adh-med-dose  { font-size: 11px; color: var(--text-secondary); }
+.adh-pct {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 28px; font-weight: 900;
+  line-height: 1;
+}
+.adh-pct.great  { color: var(--accent-success); }
+.adh-pct.ok     { color: var(--accent-warning); }
+.adh-pct.poor   { color: var(--accent-danger); }
+.adh-trend {
+  font-size: 11px; font-weight: 700; display: flex; align-items: center; gap: 4px;
+}
+.adh-trend.up   { color: var(--accent-success); }
+.adh-trend.down { color: var(--accent-danger); }
+.adh-trend.same { color: var(--text-muted); }
+
+/* Progress bar */
+.adh-bar-track {
+  height: 6px; background: rgba(45,27,0,0.06);
+  border-radius: 6px; overflow: hidden;
+}
+.adh-bar-fill {
+  height: 100%; border-radius: 6px;
+  background: var(--bar-color, linear-gradient(90deg, var(--accent-primary), var(--accent-secondary)));
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Day-by-day mini chart */
+.adh-mini-chart { display: flex; gap: 3px; align-items: flex-end; height: 28px; }
+.adh-mini-bar {
+  flex: 1; border-radius: 3px 3px 0 0;
+  background: var(--bar-color, var(--accent-primary));
+  opacity: 0.85;
+  transition: height 0.5s ease;
+  min-width: 6px;
+}
+.adh-mini-bar.empty { background: rgba(45,27,0,0.06); height: 4px !important; }
+
+/* ── Overall Adherence Ring ──────────────────────────────────────────────────── */
+.adh-overall-ring {
+  display: flex; align-items: center; gap: 20px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-card);
+}
+.ring-svg { flex-shrink: 0; }
+.ring-circle-bg  { fill: none; stroke: rgba(45,27,0,0.06); stroke-width: 8; }
+.ring-circle-fill {
+  fill: none;
+  stroke: var(--accent-primary);
+  stroke-width: 8;
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: center;
+  transition: stroke-dashoffset 1s cubic-bezier(0.4,0,0.2,1);
+}
+.ring-label { text-anchor: middle; dominant-baseline: middle; fill: var(--text-primary); }
+
+/* ── Reminder Message Bubbles ────────────────────────────────────────────────── */
+.reminder-preview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+.reminder-bubble {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
+  position: relative;
+  font-size: 13px; line-height: 1.7;
+  font-family: 'Noto Sans Devanagari', 'Inter', sans-serif;
+  box-shadow: var(--shadow-card);
+}
+.reminder-bubble::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  background: var(--lang-color, var(--accent-primary));
+}
+.reminder-lang-tag {
+  font-size: 10px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 1px; color: var(--lang-color, var(--accent-primary));
+  margin-bottom: 6px; display: flex; align-items: center; gap: 5px;
+}
+.reminder-text { color: var(--text-secondary); }
+.reminder-actions-row {
+  display: flex; gap: 6px; margin-top: 10px;
+}
+.reminder-action-chip {
+  padding: 4px 10px; border-radius: 20px;
+  font-size: 11px; font-weight: 700;
+  cursor: default;
+}
+.chip-taken  { background: rgba(39,174,96,0.1); color: var(--accent-success); border: 1px solid rgba(39,174,96,0.18); }
+.chip-snooze { background: rgba(52,152,219,0.08); color: var(--accent-info); border: 1px solid rgba(52,152,219,0.18); }
+
+/* ── IVR Simulator ─────────────────────────────────────────────────────────── */
+.ivr-phone {
+  max-width: 300px;
+  margin: 0 auto;
+  background: linear-gradient(160deg, #2D1B00, #1A0F00);
+  border: 2px solid rgba(255,153,51,0.15);
+  border-radius: 28px;
+  padding: 28px 20px 22px;
+  box-shadow: 0 20px 60px rgba(45,27,0,0.2);
+  position: relative;
+}
+.ivr-phone::before {
+  content: ''; position: absolute;
+  top: 14px; left: 50%; transform: translateX(-50%);
+  width: 50px; height: 5px;
+  background: rgba(255,153,51,0.2);
+  border-radius: 10px;
+}
+.ivr-screen {
+  background: #1A0F00;
+  border-radius: 14px;
+  padding: 16px;
+  min-height: 140px;
+  border: 1px solid rgba(255,153,51,0.1);
+  font-size: 13px; line-height: 1.7;
+  color: #FFE0B2;
+  font-family: 'Courier New', monospace;
+}
+.ivr-screen .ivr-header {
+  font-size: 10px; text-transform: uppercase; letter-spacing: 1px;
+  color: rgba(255,153,51,0.7); margin-bottom: 10px;
+  border-bottom: 1px solid rgba(255,153,51,0.1); padding-bottom: 6px;
+}
+.ivr-keypad {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 8px; margin-top: 16px;
+}
+.ivr-key {
+  background: rgba(255,153,51,0.06);
+  border: 1px solid rgba(255,153,51,0.12);
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+  font-size: 16px; font-weight: 700;
+  color: #FFE0B2;
+  cursor: pointer;
+  transition: all var(--transition);
+  user-select: none;
+}
+.ivr-key:hover { background: rgba(255,153,51,0.15); transform: scale(1.05); }
+.ivr-key.active { background: var(--accent-primary); color: #fff; border-color: var(--accent-primary); }
+.ivr-key.call { background: rgba(39,174,96,0.15); border-color: rgba(39,174,96,0.3); color: var(--accent-success); }
+.ivr-key.end  { background: rgba(231,76,60,0.15); border-color: rgba(231,76,60,0.3); color: var(--accent-danger); }
+
+/* ── Side Effects logger ────────────────────────────────────────────────────── */
+.se-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow-card);
+}
+.se-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700;
+  background: rgba(142,68,173,0.08); border: 1px solid rgba(142,68,173,0.15);
+  color: var(--accent-purple);
+}
+.se-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 10px 0; border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+.se-item:last-child { border-bottom: none; }
+
+/* ── Escalation Alert ─────────────────────────────────────────────────────── */
+.escalation-banner {
+  background: linear-gradient(135deg, rgba(231,76,60,0.08), rgba(231,76,60,0.03));
+  border: 1px solid rgba(231,76,60,0.2);
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  display: flex; align-items: center; gap: 16px;
+  animation: slideDown 0.3s ease;
+}
+.escalation-icon { font-size: 28px; flex-shrink: 0; animation: emergencyPulse3D 1.5s ease infinite; }
+.escalation-title { font-size: 14px; font-weight: 800; color: var(--accent-danger); }
+.escalation-msg   { font-size: 12px; color: var(--text-secondary); margin-top: 3px; }
+
+/* ── Channel Selector ─────────────────────────────────────────────────────── */
+.channel-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+  margin-bottom: 20px;
+}
+.channel-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 14px 10px;
+  text-align: center; cursor: pointer;
+  transition: all var(--transition);
+  box-shadow: var(--shadow-card);
+}
+.channel-card:hover { border-color: rgba(255,153,51,0.2); background: var(--bg-card-hover); transform: translateY(-2px); }
+.channel-card.selected {
+  border-color: var(--accent-primary);
+  background: rgba(255,153,51,0.06);
+  box-shadow: 0 4px 16px rgba(255,153,51,0.15);
+}
+.channel-icon { font-size: 24px; margin-bottom: 6px; }
+.channel-name { font-size: 11px; font-weight: 700; color: var(--text-secondary); }
+.channel-card.selected .channel-name { color: var(--accent-primary); }
+
+/* ── Reinforcement Messages ─────────────────────────────────────────────────── */
+.reinforcement-msg {
+  background: linear-gradient(135deg, rgba(39,174,96,0.06), rgba(255,153,51,0.04));
+  border: 1px solid rgba(39,174,96,0.15);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  font-size: 13px; font-weight: 500;
+  color: var(--text-primary);
+  margin-top: 10px;
+  animation: slideDown 0.25s ease;
+  font-family: 'Noto Sans Devanagari', 'Inter', sans-serif;
+}
+.skip-msg {
+  background: rgba(243,156,18,0.06);
+  border: 1px solid rgba(243,156,18,0.15);
+  border-radius: var(--radius-md);
+  padding: 12px 16px; font-size: 13px;
+  color: #8B6914;
+  margin-top: 10px;
+  animation: slideDown 0.25s ease;
+}
+
+/* ── Schedule Confirmed Toast variant ───────────────────────────────────────── */
+.schedule-confirm-card {
+  background: linear-gradient(135deg, rgba(39,174,96,0.06), rgba(39,174,96,0.02));
+  border: 1px solid rgba(39,174,96,0.15);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  display: flex; gap: 12px; align-items: flex-start;
+  font-size: 12px;
+}
+.schedule-confirm-pill {
+  padding: 2px 8px; border-radius: 20px;
+  font-size: 10px; font-weight: 700;
+  background: rgba(39,174,96,0.1); color: var(--accent-success);
+  border: 1px solid rgba(39,174,96,0.2);
+  white-space: nowrap;
+}
+
+/* ── Weekly Heatmap Row ─────────────────────────────────────────────────────── */
+.week-heatmap { display: flex; gap: 4px; margin-top: 8px; }
+.week-day-cell {
+  flex: 1; padding: 5px 2px;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 9px; font-weight: 700;
+  color: var(--text-muted);
+  background: rgba(45,27,0,0.04);
+}
+.week-day-cell.taken   { background: rgba(39,174,96,0.15); color: var(--accent-success); }
+.week-day-cell.skipped { background: rgba(243,156,18,0.12); color: var(--accent-warning); }
+.week-day-cell.snoozed { background: rgba(52,152,219,0.1); color: var(--accent-info); }
+.week-day-cell.today   { outline: 2px solid rgba(255,153,51,0.4); }
+
+/* ── Streaks Banner ─────────────────────────────────────────────────────────── */
+.streak-banner {
+  display: flex; align-items: center; gap: 12px;
+  background: linear-gradient(135deg, rgba(255,153,51,0.08), rgba(255,107,107,0.04));
+  border: 1px solid rgba(255,153,51,0.15);
+  border-radius: var(--radius-md);
+  padding: 10px 16px;
+  margin-bottom: 16px;
+}
+.streak-fire  { font-size: 24px; }
+.streak-count { font-size: 22px; font-weight: 900; color: var(--accent-primary); }
+.streak-label { font-size: 12px; color: var(--text-secondary); font-weight: 600; }

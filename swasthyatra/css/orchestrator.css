@@ -1,0 +1,300 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   MediOne — Orchestrator: Smart Dashboard Styles
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Unified Search Bar ────────────────────────────────────────────────────── */
+.orch-search-bar {
+  position: relative; margin-bottom: 20px;
+}
+.orch-search-input {
+  width: 100%; padding: 16px 20px 16px 48px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  color: var(--text-primary);
+  font-size: 15px; font-weight: 600;
+  outline: none; transition: all var(--transition);
+  box-shadow: 0 4px 16px rgba(45,27,0,0.04);
+}
+.orch-search-input::placeholder { color: var(--text-muted); font-weight: 500; }
+.orch-search-input:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 4px rgba(255,153,51,0.15);
+}
+.orch-search-icon {
+  position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
+  font-size: 20px; pointer-events: none; opacity: 0.8;
+}
+.orch-search-submit {
+  position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+  padding: 10px 20px; border: none; border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--accent-primary), #FF6B00);
+  color: var(--text-on-accent); font-size: 13px; font-weight: 800; font-family: 'Plus Jakarta Sans', sans-serif;
+  cursor: pointer; transition: all var(--transition);
+  box-shadow: 0 4px 12px rgba(255,153,51,0.3);
+}
+.orch-search-submit:hover { transform: translateY(-50%) scale(1.05); box-shadow: 0 6px 16px rgba(255,153,51,0.4); }
+
+/* ── Search Suggestions ────────────────────────────────────────────────────── */
+.orch-suggestions {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px;
+}
+.orch-suggestion-chip {
+  padding: 6px 14px; border-radius: 20px;
+  font-size: 12px; font-weight: 600;
+  background: rgba(45,27,0,0.03);
+  border: 1px solid var(--border);
+  color: var(--text-secondary); cursor: pointer;
+  transition: all var(--transition);
+}
+.orch-suggestion-chip:hover {
+  background: rgba(255,153,51,0.08);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  transform: translateY(-2px);
+}
+
+/* ── Emergency Alert ───────────────────────────────────────────────────────── */
+.orch-emergency-alert {
+  padding: 18px 24px;
+  background: linear-gradient(135deg, rgba(231,76,60,0.12), rgba(231,76,60,0.04));
+  border: 2px solid rgba(231,76,60,0.4);
+  border-radius: var(--radius-lg);
+  margin-bottom: 16px;
+  animation: emergencyPulse3D 1.5s ease infinite;
+}
+.orch-emergency-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 18px; font-weight: 900;
+  color: #C0392B; margin-bottom: 6px;
+}
+.orch-emergency-body {
+  font-size: 14px; color: var(--text-secondary);
+  line-height: 1.6; font-weight: 500;
+}
+
+/* ── Priority Attention Cards ──────────────────────────────────────────────── */
+.orch-priorities {
+  display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px;
+}
+.orch-priority-card {
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 18px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition);
+  position: relative; overflow: hidden;
+  box-shadow: 0 2px 10px rgba(45,27,0,0.03);
+}
+.orch-priority-card:hover {
+  transform: translateX(4px) translateY(-1px);
+  border-color: rgba(255,153,51,0.25);
+  box-shadow: 0 4px 16px rgba(45,27,0,0.06);
+}
+.orch-priority-card::before {
+  content: ''; position: absolute;
+  left: 0; top: 0; bottom: 0; width: 4px;
+}
+.orch-priority-card.sev-critical::before { background: #E74C3C; }
+.orch-priority-card.sev-high::before { background: #F39C12; }
+.orch-priority-card.sev-medium::before { background: #8E44AD; }
+.orch-priority-card.sev-low::before { background: var(--accent-primary); }
+.orch-priority-card.sev-positive::before { background: #27AE60; }
+
+.orch-priority-icon {
+  font-size: 24px; flex-shrink: 0;
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: rgba(45,27,0,0.03);
+}
+.orch-priority-text {
+  flex: 1;
+}
+.orch-priority-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px; font-weight: 800;
+  color: var(--text-primary);
+}
+.orch-priority-detail {
+  font-size: 12px; color: var(--text-muted);
+  margin-top: 3px; font-weight: 500;
+}
+.orch-priority-arrow {
+  font-size: 16px; color: var(--text-muted);
+  flex-shrink: 0; font-weight: bold;
+}
+
+/* ── Agent Hub Cards (quick-access grid) using 3D Flip ─────────────────────── */
+.orch-agent-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 14px; margin-bottom: 24px;
+  perspective: 1200px; /* Enable 3D space */
+}
+@media (max-width: 900px) { .orch-agent-grid { grid-template-columns: repeat(2, 1fr); } }
+
+.orch-agent-card {
+  padding: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-align: center;
+  position: relative;
+  /* 3D Flip setup: apply transform-style and transition to the card */
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.6s ease;
+  box-shadow: var(--shadow-card);
+}
+
+/* Front content wraps existing children */
+.orch-agent-card > * {
+  backface-visibility: hidden;
+}
+
+/* Pseudo-element for back face containing generic extra details */
+.orch-agent-card::before {
+  content: 'Open Agent →';
+  display: flex; align-items: center; justify-content: center;
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(135deg, var(--bg-card), var(--bg-surface));
+  color: var(--accent-primary);
+  font-weight: 800; font-size: 14px;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  border-radius: var(--radius-md);
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+  border: 2px solid var(--accent-primary);
+}
+.orch-agent-card:hover {
+  transform: rotateY(180deg);
+  box-shadow: 0 10px 30px rgba(255,153,51,0.15);
+}
+
+/* Accent lines below */
+.orch-agent-card::after {
+  content: ''; position: absolute;
+  bottom: 0; left: 0; right: 0; height: 3px;
+  backface-visibility: hidden;
+}
+.orch-agent-card.agent-triage::after { background: linear-gradient(90deg, #3498DB, #8E44AD); }
+.orch-agent-card.agent-records::after { background: linear-gradient(90deg, var(--accent-primary), #27AE60); }
+.orch-agent-card.agent-adherence::after { background: linear-gradient(90deg, #8E44AD, #E040FB); }
+.orch-agent-card.agent-hospitals::after { background: linear-gradient(90deg, #F39C12, #FF6D00); }
+.orch-agent-card.agent-explainer::after { background: linear-gradient(90deg, #E74C3C, #FF5252); }
+.orch-agent-card.agent-nudge::after { background: linear-gradient(90deg, #FF9800, #F1C40F); }
+
+.orch-agent-icon { font-size: 28px; margin-bottom: 8px; filter: drop-shadow(0 2px 4px rgba(45,27,0,0.1)); }
+.orch-agent-name { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 13px; font-weight: 800; color: var(--text-primary); }
+.orch-agent-stat { font-size: 11px; color: var(--text-muted); margin-top: 4px; font-weight: 600;}
+
+/* ── Journey Timeline ──────────────────────────────────────────────────────── */
+.orch-timeline {
+  position: relative;
+  padding-left: 32px;
+}
+.orch-timeline::before {
+  content: ''; position: absolute;
+  left: 14px; top: 0; bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--accent-primary), rgba(45,27,0,0.05) 90%);
+  border-radius: 2px;
+}
+
+.orch-timeline-item {
+  position: relative;
+  padding: 12px 16px;
+  margin-bottom: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  transition: all var(--transition);
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(45,27,0,0.02);
+}
+.orch-timeline-item:hover {
+  border-color: rgba(255,153,51,0.25);
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(45,27,0,0.06);
+}
+.orch-timeline-dot {
+  position: absolute;
+  left: -25px; top: 16px;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  border: 3px solid var(--accent-primary);
+  background: var(--bg-base);
+  box-shadow: 0 0 0 2px var(--bg-base);
+}
+.orch-timeline-dot.type-visit { border-color: var(--accent-primary); }
+.orch-timeline-dot.type-nudge { border-color: #F39C12; }
+.orch-timeline-dot.type-triage { border-color: #3498DB; }
+
+.orch-timeline-date {
+  font-size: 10px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 0.8px; color: var(--text-muted);
+}
+.orch-timeline-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px; font-weight: 800;
+  color: var(--text-primary); margin-top: 3px;
+}
+.orch-timeline-detail {
+  font-size: 12px; color: var(--text-secondary);
+  margin-top: 2px; font-weight: 500;
+}
+
+/* ── Section Label ─────────────────────────────────────────────────────────── */
+.orch-section-label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px; font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+  margin-bottom: 14px; margin-top: 6px;
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* ── Two-column layout ─────────────────────────────────────────────────────── */
+.orch-grid {
+  display: grid; grid-template-columns: 1.2fr 0.8fr;
+  gap: 24px;
+}
+@media (max-width: 900px) { .orch-grid { grid-template-columns: 1fr; } }
+
+/* ── Greeting Card ─────────────────────────────────────────────────────────── */
+.orch-greeting {
+  padding: 24px 28px;
+  background: linear-gradient(135deg, rgba(255,153,51,0.1), rgba(255,107,107,0.06));
+  border: 1px solid rgba(255,153,51,0.2);
+  border-radius: var(--radius-lg);
+  margin-bottom: 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  box-shadow: 0 8px 24px rgba(255,153,51,0.08);
+}
+.orch-greeting-text h2 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 24px; margin: 0; font-weight: 900; color: var(--text-primary); }
+.orch-greeting-text p {
+  font-size: 14px; color: var(--text-secondary); margin: 6px 0 0; font-weight: 500;
+}
+.orch-health-score {
+  text-align: center; padding: 10px 14px;
+  background: var(--bg-card);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255,153,51,0.15);
+  box-shadow: 0 4px 12px rgba(45,27,0,0.04);
+}
+.orch-health-score-value {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 36px; font-weight: 900;
+  background: linear-gradient(135deg, var(--accent-primary), #FF6B00);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+.orch-health-score-label {
+  font-size: 10px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 0.8px; color: var(--text-muted); margin-top: 4px;
+}

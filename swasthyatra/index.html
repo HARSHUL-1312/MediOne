@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediOne — Health Records Agent</title>
+  <meta name="description" content="MediOne: Your complete, portable health journey companion. Manage visits, prescriptions, lab reports, and emergency info in one secure app." />
+  <meta name="theme-color" content="#0a0f1e" />
+
+  <!-- Preconnect for Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Favicon (emoji fallback) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩺</text></svg>" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/adherence.css" />
+  <link rel="stylesheet" href="css/triage.css" />
+  <link rel="stylesheet" href="css/hospital-finder.css" />
+  <link rel="stylesheet" href="css/explainer.css" />
+  <link rel="stylesheet" href="css/nudge.css" />
+  <link rel="stylesheet" href="css/orchestrator.css" />
+  <!-- Google Noto for multi-language support -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&family=Noto+Sans+Tamil:wght@400;700&family=Noto+Sans+Telugu:wght@400;700&family=Noto+Sans+Bengali:wght@400;700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;700&family=Noto+Sans+Tamil:wght@400;700&family=Noto+Sans+Telugu:wght@400;700&family=Noto+Sans+Bengali:wght@400;700&display=swap" />
+</head>
+<body>
+  <div class="app-layout">
+
+    <!-- ── Sidebar ──────────────────────────────────────────────────── -->
+    <aside class="sidebar" id="sidebar" aria-label="Navigation">
+      <!-- Rendered by UIController -->
+    </aside>
+
+    <!-- ── Main Area ─────────────────────────────────────────────────── -->
+    <div class="main-content">
+
+      <!-- Topbar -->
+      <header class="topbar" aria-label="Page header">
+        <div class="topbar-left">
+          <h1 id="topbar-title">Dashboard</h1>
+          <p id="topbar-sub" style="font-size:12px;color:var(--text-secondary)"></p>
+        </div>
+        <div class="topbar-right">
+          <div class="abdm-badge">
+            <span>🛡️</span> ABDM PHR
+          </div>
+          <div class="topbar-time" id="topbar-time" aria-live="polite"></div>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <main class="page-content" id="page-content" role="main" aria-live="polite">
+        <!-- Loading splash shown before JS hydrates -->
+        <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:60vh;gap:16px;color:var(--text-muted)">
+          <div style="font-size:52px;animation:pulse-ring 1.5s ease infinite">🩺</div>
+          <div style="font-size:16px;font-weight:600">Loading MediOne…</div>
+        </div>
+      </main>
+
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Scripts -->
+  <script src="js/data-store.js"></script>
+  <script src="js/records-engine.js"></script>
+  <script src="js/adherence-store.js"></script>
+  <script src="js/adherence-engine.js"></script>
+  <script src="js/triage-engine.js"></script>
+  <script src="js/hospital-finder-engine.js"></script>
+  <script src="js/explainer-engine.js"></script>
+  <script src="js/nudge-engine.js"></script>
+  <script src="js/orchestrator-engine.js"></script>
+  <script src="js/ui-controller.js"></script>
+  <script src="js/adherence-ui.js"></script>
+  <script src="js/triage-ui.js"></script>
+  <script src="js/hospital-finder-ui.js"></script>
+  <script src="js/explainer-ui.js"></script>
+  <script src="js/nudge-ui.js"></script>
+  <script src="js/orchestrator-ui.js"></script>
+  <script src="js/settings-ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
